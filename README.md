@@ -38,6 +38,8 @@ This project was developed with the following technologies:
 - Compatible with all mobile devices and with a beautiful and pleasant user interface.
 - Back-end with Convex Db.
 - Login auth with: Google and Facebook using Clerk.
+- Cart items.
+- Admin page, to manage products.
 - API stripe connection to process payments
 - API image upload Uploadthing connection
 
