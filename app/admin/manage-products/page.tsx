@@ -13,8 +13,6 @@ import { Id } from '@/convex/_generated/dataModel';
 import { Product } from '@/types';
 
 
-
-
 export default function ManageProducts() {
     const products = useQuery(api.products.getAll);
     const removeProduct = useMutation(api.products.remove);
@@ -51,6 +49,8 @@ export default function ManageProducts() {
                                 <TableRow>
                                     <TableHead className="text-blue-300">Title</TableHead>
                                     <TableHead className="text-blue-300">Description</TableHead>
+                                     <TableHead className="text-blue-300">Size</TableHead> 
+                                   {/* <TableHead className="text-blue-300">Quantity</TableHead> */} 
                                     <TableHead className="text-blue-300">Price</TableHead>
                                     <TableHead className="text-blue-300">Actions</TableHead>
                                 </TableRow>
@@ -60,6 +60,8 @@ export default function ManageProducts() {
                                     <TableRow key={product._id}>
                                         <TableCell className="font-medium text-blue-200">{product.title}</TableCell>
                                         <TableCell className="font-medium text-blue-200">{product.description}</TableCell>
+                                        <TableCell className="font-medium text-blue-200">{product.size}</TableCell>
+                                      {/* <TableCell className="font-medium text-blue-200">{product.quantityProduct}</TableCell> */} 
                                         <TableCell className="text-blue-200">${product.price.toFixed(2)}</TableCell>
                                         <TableCell className="flex space-x-2">
                                             <Link href={`/admin/${product._id}/edit`}>

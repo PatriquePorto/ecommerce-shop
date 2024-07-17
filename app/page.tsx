@@ -13,6 +13,7 @@ interface Product {
   _id: string;
   title: string;
   description: string;
+  size: string;
   price: number;
   imageUrl: string;
 }
@@ -45,7 +46,9 @@ export default function Homepage() {
     const cartItems = cart.map(item => ({
       _id: item._id,
       title: item.title,
-      price: item.price,
+      size: item.size,
+      price: item.price, 
+      imageUrl: item.imageUrl,
       quantity: 1,
     }));
 
@@ -80,10 +83,12 @@ export default function Homepage() {
                 <CardContent>
                   <CardTitle className="text-xl font-bold mb-2 text-blue-300">{product.title}</CardTitle>
                   <p className="text-blue-400 mb-4">{product.description}</p>
+                  <p className="text-blue-400 mb-4">Size: {product.size}</p>
+                  {/* <p className="text-blue-400 mb-4">Quantity: {product.quantity}</p> */}
                   <p className="text-2xl font-bold text-blue-200">${product.price.toFixed(2)}</p>
                   <p className="text-blue-400 mt-2 flex items-center">
                     <Truck className="w-4 h-4 mr-2" />
-                    Delivery: 2-3 Days
+                    Delivery: 3-5 Days
                   </p>
                 </CardContent>
                 <CardFooter>
@@ -108,7 +113,7 @@ export default function Homepage() {
             Cart ({cart.length})
           </Button>
         </SheetTrigger>
-        <SheetContent className="bg-blue-950 text-blue-100">
+        <SheetContent className=" bg-blue-950 text-blue-100">
           <SheetHeader>
             <SheetTitle className="text-blue-300">Your Cart</SheetTitle>
           </SheetHeader>
@@ -117,9 +122,12 @@ export default function Homepage() {
           ) : (
             <>
               {cart.map((item) => (
-                <div key={item._id} className="flex justify-between items-center py-2 border-b border-blue-800">
-                  <span className="text-blue-300">{item.title}</span>
-                  <span className="text-blue-200">${item.price.toFixed(2)}</span>
+                <div key={item._id} className="flex flex-col justify-between gap-4 items-center py-2 border-b border-blue-800">
+                  
+                  <img src={item.imageUrl} alt={item.title} className="w-20 h-20 rounded-md" />
+                  <span className="text-blue-300 text-sm ">{item.title}</span>
+                  <span className="text-blue-300 text-sm">Size: {item.size}</span>                       
+                  <span className="text-blue-200">Price: ${item.price.toFixed(2)}</span>
                   <Button
                     variant="destructive"
                     size="sm"

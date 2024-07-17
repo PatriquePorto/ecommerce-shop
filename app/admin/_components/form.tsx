@@ -15,6 +15,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 interface ProductData {
     title: string;
     description: string;
+    size: string[];
     price: number;
     imageUrl: string;
 }
@@ -23,6 +24,7 @@ export const Form: React.FC = () => {
     const [productData, setProductData] = useState<ProductData>({
         title: '',
         description: '',
+        size: [],
         price: 0,
         imageUrl: '',
     });
@@ -30,20 +32,35 @@ export const Form: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [isFormValid, setIsFormValid] = useState(false);
+ 
+     /*Product Sizes */
+    const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
 
+    const handleSizeSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedSize = e.target.value;
+        if (e.target.checked) {
+            setProductData(prev => ({ ...prev, size: [...prev.size, selectedSize] }));
+        } else {
+            setProductData(prev => ({ ...prev, size: prev.size.filter(size => size !== selectedSize) }));
+        }
+    };
+
+    /* Add Product */
     const addProduct = useMutation(api.products.add);
 
     useEffect(() => {
-        const { title, description, price, imageUrl } = productData;
+        const { title, description, size, price, imageUrl } = productData;
         setIsFormValid(
             title.trim() !== '' &&
             description.trim() !== '' &&
+            size[0] !== '' &&
             price > 0 &&
             imageUrl !== ''
         );
     }, [productData]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
         const { name, value } = e.target;
         setProductData(prev => ({
             ...prev,
@@ -61,10 +78,15 @@ export const Form: React.FC = () => {
         setError(null);
         console.log(productData)
         try {
-            await addProduct(productData);
+
+            const sizeString = productData.size.join(', '); // Convert array to string
+            const modifiedProductData = { ...productData, size: sizeString };
+
+            await addProduct(modifiedProductData);
             setProductData({
                 title: '',
                 description: '',
+                size: [],
                 price: 0,
                 imageUrl: '',
             });
@@ -112,6 +134,45 @@ export const Form: React.FC = () => {
                                 className="bg-blue-900 border-blue-700 text-blue-100 focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
+
+                        <div className='space-y-2 '>
+                                <Label htmlFor="size" className="text-blue-300">Size Product</Label>
+                                <div className="flex flex-wrap">
+                                    {sizes.map(size => (
+                                        <div key={size} className="flex items-center mr-4">          
+                                            <input
+                                                type="checkbox"
+                                                className="form-checkbox h-5 w-5 text-blue-300"
+                                                id={`size-${size}`}
+                                                name="size[]"
+                                                value={size}
+                                                onChange={handleSizeSelection}
+                                            />
+                                            <label htmlFor={`size-${size}`} className="ml-2 text-blue-300">
+                                                {size}
+                                            </label>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                       
+                                    
+                       {/* 
+                                   <div className='space-y-2'>
+                            <Label htmlFor="quantityProduct" className="text-blue-300">Quantity</Label>
+                            <Input
+                                type="number"
+                                id="quantityProduct"
+                                name="quantityProduct"
+                                value={productData.quantityProduct}
+                                onChange={handleInputChange}
+                                required
+                                min="0"
+                                className="bg-blue-900 border-blue-700 text-blue-100 focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+                       */}
+              
 
                         <div className="space-y-2">
                             <Label htmlFor="price" className="text-blue-300">Price</Label>

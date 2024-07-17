@@ -17,6 +17,7 @@ import { Id } from '@/convex/_generated/dataModel';
 interface ProductData {
     title: string;
     description: string;
+    size: string;
     price: number;
     imageUrl: string;
 }
@@ -29,6 +30,7 @@ export default function EditProduct() {
     const [productData, setProductData] = useState<ProductData>({
         title: '',
         description: '',
+        size: '',
         price: 0,
         imageUrl: '',
     });
@@ -45,6 +47,7 @@ export default function EditProduct() {
             setProductData({
                 title: product.title,
                 description: product.description,
+                size: product.size,
                 price: product.price,
                 imageUrl: product.imageUrl
             });
@@ -52,10 +55,11 @@ export default function EditProduct() {
     }, [product]);
 
     useEffect(() => {
-        const { title, description, price, imageUrl } = productData;
+        const { title, description, size,  price, imageUrl } = productData;
         setIsFormValid(
             title.trim() !== '' &&
             description.trim() !== '' &&
+            size.trim() !== '' &&
             price > 0 &&
             imageUrl !== ''
         );
@@ -126,6 +130,36 @@ export default function EditProduct() {
                                 className="bg-blue-900 border-blue-700 text-blue-100 focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
+
+                        <div className='space-y-2'>
+                            <Label htmlFor="size" className="text-blue-300">Size</Label>
+                            <Input
+                                type="text"
+                                id="size"
+                                name="size"
+                                value={productData.size}
+                                onChange={handleInputChange}
+                                required
+                                className="bg-blue-900 border-blue-700 text-blue-100 focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+
+                    {/* 
+                             <div className='space-y-2'>
+                            <Label htmlFor="quantity" className="text-blue-300">Quantity</Label>
+                            <Input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                value={productData.quantityProduct}
+                                onChange={handleInputChange}
+                                required
+                                min="0"
+                                className="bg-blue-900 border-blue-700 text-blue-100 focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+                    */}
+                 
 
                         <div className="space-y-2">
                             <Label htmlFor="price" className="text-blue-300">Price</Label>

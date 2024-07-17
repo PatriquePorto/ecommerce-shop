@@ -4,7 +4,7 @@ import { v } from "convex/values";
 
 // Create a new task with the given text
 export const add = mutation({
-    args: { title: v.string(), description: v.string(), price: v.number(), imageUrl: v.string() },
+    args: { title: v.string(), description: v.string(), size: v.string(),  price: v.number(), imageUrl: v.string() },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
 
@@ -15,6 +15,7 @@ export const add = mutation({
         const newProductId = await ctx.db.insert("products", {
             title: args.title,
             description: args.description,
+            size: args.size,
             price: args.price,
             imageUrl: args.imageUrl,
         });
@@ -36,7 +37,7 @@ export const remove = mutation({
 });
 
 export const update = mutation({
-    args: { id: v.id("products"), title: v.string(), description: v.string(), price: v.number(), imageUrl: v.string() },
+    args: { id: v.id("products"), title: v.string(), description: v.string(), size: v.string(), price: v.number(), imageUrl: v.string() },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
 
@@ -47,6 +48,7 @@ export const update = mutation({
         await ctx.db.patch(args.id, {
             title: args.title,
             description: args.description,
+            size: args.size,
             price: args.price,
             imageUrl: args.imageUrl,
         });

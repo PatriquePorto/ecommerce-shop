@@ -15,6 +15,8 @@ export const pay = action({
                 _id: v.string(),
                 title: v.string(),
                 price: v.number(),
+                size: v.string(),
+                imageUrl: v.string(),
                 quantity: v.number(),
             })
         ),
@@ -27,6 +29,7 @@ export const pay = action({
                 currency: "usd",
                 product_data: {
                     name: item.title,
+                    images: [item.imageUrl],
                 },
                 unit_amount: Math.round(item.price * 100),
             },

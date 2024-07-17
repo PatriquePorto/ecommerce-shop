@@ -25,8 +25,6 @@ This project was developed with the following technologies:
 - Javascript
 - Tailwind CSS
 
-<br>
-
 - Backend with:
 - Convex Db 
 
@@ -45,11 +43,26 @@ This project was developed with the following technologies:
 - API stripe connection to process payments
 - API image upload Uploadthing connection
 
-<br>
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+
+First, run the development server:
+
+```bash
+
+1 - npx prisma migrate dev
+
+2 - npm or yarn install
+
+3 - first terminal: yarn dev or npm run dev
+
+3 - second terminal: cd src/docker && docker compose up
+
+3 - third terminal: npx prisma studio
+
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
