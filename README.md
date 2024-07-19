@@ -19,13 +19,14 @@
 This project was developed with the following technologies:
 
 - Front-End With:
-
+<br>
 - React/Next
 - Typescript
 - Javascript
 - Tailwind CSS
-
+<br>
 - Backend with:
+<br>
 - Convex Db 
 
 
@@ -52,15 +53,9 @@ First, run the development server:
 
 ```bash
 
-1 - npx prisma migrate dev
+1 - Tutorial do run:
 
-2 - npm or yarn install
 
-3 - first terminal: yarn dev or npm run dev
-
-3 - second terminal: cd src/docker && docker compose up
-
-3 - third terminal: npx prisma studio
 
 ```
 
