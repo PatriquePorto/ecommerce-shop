@@ -25,6 +25,8 @@ This project was developed with the following technologies:
 - Javascript
 - Tailwind CSS
 
+<br>
+
 - Backend with:
 - Convex Db 
 
