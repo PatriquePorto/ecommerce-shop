@@ -19,14 +19,13 @@
 This project was developed with the following technologies:
 
 - Front-End With:
-<br>
+
 - React/Next
 - Typescript
 - Javascript
 - Tailwind CSS
-<br>
+
 - Backend with:
-<br>
 - Convex Db 
 
 
